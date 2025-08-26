@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOA Rawat Jalan</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #000;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            page-break-after: always;
+        }
+        
+        .page2 {
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex-grow: 1;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end; /* Bagian bawah header sejajar */
+            height: 70px;
+        }
+        .faskes {
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        .header-right {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        .header-text {
+            font-size: 11px;
+            text-align: right;
+            line-height: 1.4;
+            padding-bottom: 5px; /* Penyesuaian agar sejajar dengan logo */
+        }
+        .header-logo img {
+            height: 75px; /* Ukuran logo disesuaikan agar sejajar */
+            width: auto;
+        }
+        .divider {
+            border-bottom: 1.5px solid #000;
+            margin: 5px 0;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            page-break-inside: avoid;
+        }
+        .info-table td {
+            padding: 3px 2px;
+            vertical-align: top;
+            font-size: 12px;
+        }
+        .info-table td.label {
+            width: 25%;
+            font-weight: normal;
+        }
+        .info-table td.label::after {
+            content: ":";
+            float: right;
+            margin-right: 10px;
+        }
+        .info-table .value {
+            font-weight: bold;
+        }
+        .benefit-list {
+            margin-top: 8px;
+            font-size: 12px;
+        }
+        .benefit-list ol {
+            list-style: none;
+            counter-reset: item;
+            padding-left: 0;
+        }
+        .benefit-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 3px;
+        }
+        .benefit-list li::before {
+            counter-increment: item;
+            content: counter(item) ". ";
+            width: 25px; 
+            flex-shrink: 0;
+        }
+        .benefit-list .desc {
+            flex-grow: 1;
+        }
+        .benefit-list .limit {
+            text-align: right;
+            width: 150px;
+            flex-shrink: 0;
+        }
+        .title-section {
+            text-align: center;
+            margin: 8px 0;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .tc {
+            font-size: 12px;
+            margin-top: 20px;
+        }
+        .tc ul {
+            padding-left: 0;
+            list-style-type: none;
+        }
+        /* === PERBAIKAN PENOMORAN === */
+        .tc li {
+            padding-left: 20px;
+            text-indent: -20px;
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+        .footer, .footer2 {
+            font-size: 10px;
+            padding-top: 10px;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        /* page 2 specifics */
+        .signature-barcode-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 40px;
+            font-size: 12px;
+        }
+        .barcode-container {
+            text-align: right;
+        }
+        .barcode-container img {
+            height: 50px;
+            display: block;
+        }
+        .barcode-container div {
+            margin-top: 4px;
+            font-size: 11px;
+        }
+        .statement {
+            font-size: 12px;
+            text-align: justify;
+            margin-top: 40px;
+            line-height: 1.5;
+        }
+        .statement ul {
+            list-style: none;
+            padding-left: 0;
+            counter-reset: statement-counter;
+        }
+        .statement li {
+            counter-increment: statement-counter;
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .statement li::before {
+            content: counter(statement-counter, lower-alpha) ".";
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        @page {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="main-content">
+            <div class="top-header">
+                <div class="faskes">
+                    <div>{{FacilityName}}</div>
+                    <div>{{FacilityAddress}}</div>
+                    <div>{{FacilityProvince}}</div>
+                </div>
+                <div class="header-right">
+                    <div class="header-text">
+                        <div>Mandiri Inhealth Contact Center</div>
+                        <div>Telp. 14070</div>
+                        <div>Email : customerservice@mandiriinhealth.co.id</div>
+                    </div>
+                    <div class="header-logo">
+                        <img src="{{LogoImageSrc}}" alt="Mandiri Inhealth Logo">
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <table class="info-table">
+                <tr><td class="label">Nama Peserta</td><td class="value">{{PatientName}}</td></tr>
+                <tr><td class="label">No. Kartu</td><td class="value">{{CardNumber}}</td></tr>
+                <tr><td class="label">Tanggal Lahir</td><td class="value">{{FormattedDateOfBirth}}</td></tr>
+                <tr><td class="label">No. Polis</td><td class="value">{{PolicyNumber}}</td></tr>
+                <tr><td class="label">Plan</td><td class="value">{{PlanName}}</td></tr>
+                <tr><td class="label">Masa Polis</td><td class="value">{{PolicyPeriod}}</td></tr>
+                <tr><td class="label">Pemegang Polis</td><td class="value">{{PolicyHolder}}</td></tr>
+                <tr><td class="label">Skema Produk</td><td class="value">{{ProductScheme}}</td></tr>
+            </table>
+
+            <div class="divider"></div>
+            <div class="title-section">PENDAFTARAN PASIEN RAWAT JALAN<br>INFORMASI BENEFIT</div>
+            <div class="divider"></div>
+
+            <div class="benefit-list">
+                <ol>
+                    {{#each Benefits}}
+                    <li><span class="desc">{{this.BENEFITNAME}}</span><span class="limit">{{this.TAGIHAN}}</span></li>
+                    {{/each}}
+                </ol>
+            </div>
+
+            <div class="tc">
+                <b>**Term & Condition:**</b>
+                <ul>
+                    {{#each TermsAndConditions}}
+                    <li>{{this.deskripsi_loa}}</li>
+                    {{/each}}
+                </ul>
+                <p style="margin-top: 15px;">{{FormattedLetterDate}}</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div>PT Asuransi Jiwa Inhealth Indonesia Berizin dan diawasi oleh Otoritas Jasa Keuangan<br>
+            Mandiri Inhealth Tower<br>
+            Jl. Prof. Dr. Satrio Kav. E-IV No. 6, Mega Kuningan<br>
+            Kel. Karet Kuningan Kec. Setiabudi<br>
+            Jakarta Selatan 12940<br>
+            Telp. (021) 25095000</div>
+        </div>
+    </div>
+
+    <div class="page2">
+        <div class="main-content">
+            <div class="top-header">
+                 <div class="faskes">
+                    <div>{{FacilityName}}</div>
+                    <div>{{FacilityAddress}}</div>
+                    <div>{{FacilityProvince}}</div>
+                </div>
+                <div class="header-right">
+                    <div class="header-text">
+                        <div>Mandiri Inhealth Contact Center</div>
+                        <div>Telp. 14070</div>
+                        <div>Email : customerservice@mandiriinhealth.co.id</div>
+                    </div>
+                    <div class="header-logo">
+                        <img src="{{LogoImageSrc}}" alt="Mandiri Inhealth Logo">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="signature-barcode-section">
+                <div class="signature">.:::::TTD Pasien/Keluarga:::::.</div>
+                <div class="barcode-container">
+                    <img src="https://barcodeapi.org/api/128/{{ReferenceNumber}}" alt="barcode">                </div>
+            </div>
+
+            <div class="statement">
+                <ul>
+                  <li><b>Saya menyetujui dan memberi kuasa kepada PT Asuransi Jiwa Inhealth Indonesia (Perusahaan) dan afiliasinya untuk diberikan akses berupa segala informasi dan/atau dokumen dari dokter, fasilitas kesehatan dan/atau pihak lain sehubungan dengan layanan medis yang diberikan kepada Saya atau Tanggungan Saya berdasarkan ketentuan yang berlaku untuk keperluan administrasi, pembayaran klaim asuransi dan jaminan pembiayaan kesehatan.</b></li>
+                  <li><b>Apabila terdapat indikasi ketidakbenaran atas informasi dan/atau dokumen yang disampaikan, Saya memberikan hak sepenuhnya kepada Perusahaan untuk tidak melanjutkan proses klaim, mengembalikan biaya klaim yang telah dibayarkan Perusahaan dan/atau menghentikan pelayanan kepada Saya atau Tanggungan Saya baik secara penjaminan di provider (cashless) dan/atau reimbursement.</b></li>
+                  <li><b>LOA ini telah divalidasi melalui fitur FitAja! serta berfungsi sebagai persetujuan dari peserta dan merupakan pengganti tanda tangan basah peserta maupun provider.</b></li>
+            </div>
+        </div>
+        <div class="footer2">
+            <div>PT Asuransi Jiwa Inhealth Indonesia Berizin dan diawasi oleh Otoritas Jasa Keuangan<br>
+            Mandiri Inhealth Tower<br>
+            Jl. Prof. Dr. Satrio Kav. E-IV No. 6, Mega Kuningan<br>
+            Kel. Karet Kuningan Kec. Setiabudi<br>
+            Jakarta Selatan 12940<br>
+            Telp. (021) 25095000</div>
+        </div>
+    </div>
+</body>
+</html>

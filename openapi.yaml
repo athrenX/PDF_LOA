@@ -1,0 +1,16 @@
+openapi: 3.0.3
+info:
+  title: Contoh API Saya
+  version: "1.0.0"
+paths:
+  /hello:
+    get:
+      summary: Endpoint contoh
+      responses:
+        '200':
+          description: Berhasil
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Hello, world!"

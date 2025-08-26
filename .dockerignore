@@ -1,0 +1,19 @@
+# Git folder
+.git
+.gitignore
+
+# Docker specific
+Dockerfile
+.dockerignore
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# IDE specific
+.vs/
+.vscode/
+.idea/
+
+# Others
+README.md

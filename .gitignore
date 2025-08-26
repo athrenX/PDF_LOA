@@ -1,0 +1,41 @@
+# Dependencies
+/packages/
+/node_modules/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / VS Code specific
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+
+# Rider specific
+.idea/
+
+# User-specific files
+*.userprefs
+*.DS_Store
+
+# Environment variables and secrets
+.env
+appsettings.Local.json
+secrets.json
+
+# Log files
+*.log
+logs/
+
+# Build artifacts and temporary files
+*.tmp
+*.bak
+*.orig
+
+# Cache files
+*.cache
+
+# Published output
+/publish/
