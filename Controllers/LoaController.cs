@@ -55,7 +55,12 @@ public class LoaController : ControllerBase
             }
             else
             {
-                var pdfStream = await page.PdfStreamAsync(new PdfOptions { Format = PuppeteerSharp.Media.PaperFormat.A4, PrintBackground = true });
+                var pdfStream = await page.PdfStreamAsync(new PdfOptions 
+                { 
+                    Width = "215mm", 
+                    Height = "330mm",
+                    PrintBackground = true 
+                });
                 pdfStream.Position = 0;
                 return File(pdfStream, "application/pdf", $"{fileName}.pdf");
             }

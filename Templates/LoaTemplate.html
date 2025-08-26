@@ -13,37 +13,30 @@
             background: #fff;
             color: #000;
         }
-
-        .page {
-            width: 210mm;
-            height: 297mm;
+    
+        .page, .page2 {
+            inline-size: 215mm;
+            block-size: 330mm;
             margin: 0 auto;
             padding: 15mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
+        }
+    
+        .page {
             page-break-after: always;
         }
-        
-        .page2 {
-            width: 210mm;
-            height: 297mm;
-            margin: 0 auto;
-            padding: 15mm;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-        }
-
+    
         .main-content {
             flex-grow: 1;
         }
-
+    
         .top-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end; /* Bagian bawah header sejajar */
-            height: 70px;
+            align-items: center; 
+            block-size: 80px; 
         }
         .faskes {
             font-weight: bold;
@@ -52,27 +45,30 @@
         }
         .header-right {
             display: flex;
-            align-items: flex-end;
+            align-items: center; 
             gap: 15px;
         }
         .header-text {
             font-size: 11px;
-            text-align: right;
+            text-align: end;
             line-height: 1.4;
-            padding-bottom: 5px; /* Penyesuaian agar sejajar dengan logo */
+        }
+        .header-logo { 
+            margin-block-start: -14px; 
         }
         .header-logo img {
-            height: 75px; /* Ukuran logo disesuaikan agar sejajar */
-            width: auto;
+            block-size: 99px; 
+            inline-size: auto;
+            display: block;
         }
         .divider {
-            border-bottom: 1.5px solid #000;
+            border-block-end: 1.5px solid #000;
             margin: 5px 0;
         }
         .info-table {
-            width: 100%;
+            inline-size: 100%;
             border-collapse: collapse;
-            margin-top: 8px;
+            margin-block-start: 8px;
             page-break-inside: avoid;
         }
         .info-table td {
@@ -81,43 +77,43 @@
             font-size: 12px;
         }
         .info-table td.label {
-            width: 25%;
+            inline-size: 25%;
             font-weight: normal;
         }
         .info-table td.label::after {
             content: ":";
-            float: right;
-            margin-right: 10px;
+            float: inline-end;
+            margin-inline-end: 10px;
         }
         .info-table .value {
             font-weight: bold;
         }
         .benefit-list {
-            margin-top: 8px;
+            margin-block-start: 8px;
             font-size: 12px;
         }
         .benefit-list ol {
             list-style: none;
             counter-reset: item;
-            padding-left: 0;
+            padding-inline-start: 0;
         }
         .benefit-list li {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 3px;
+            margin-block-end: 3px;
         }
         .benefit-list li::before {
             counter-increment: item;
             content: counter(item) ". ";
-            width: 25px; 
+            inline-size: 25px; 
             flex-shrink: 0;
         }
         .benefit-list .desc {
             flex-grow: 1;
         }
         .benefit-list .limit {
-            text-align: right;
-            width: 150px;
+            text-align: end;
+            inline-size: 150px;
             flex-shrink: 0;
         }
         .title-section {
@@ -128,67 +124,72 @@
         }
         .tc {
             font-size: 12px;
-            margin-top: 20px;
+            margin-block-start: 20px;
         }
         .tc ul {
-            padding-left: 0;
+            padding-inline-start: 0;
             list-style-type: none;
+            counter-reset: tc-counter;
         }
-        /* === PERBAIKAN PENOMORAN === */
         .tc li {
-            padding-left: 20px;
-            text-indent: -20px;
-            margin-bottom: 5px;
+            display: flex;
+            margin-block-end: 5px;
             text-align: justify;
+            counter-increment: tc-counter;
+        }
+        .tc li::before {
+            content: counter(tc-counter) ". ";
+            margin-inline-end: 8px;
+            flex-shrink: 0;
         }
         .footer, .footer2 {
             font-size: 10px;
-            padding-top: 10px;
-            text-align: left;
+            padding-block-start: 10px;
+            text-align: start;
             line-height: 1.4;
         }
-
+    
         /* page 2 specifics */
         .signature-barcode-section {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-top: 40px;
+            margin-block-start: 40px;
             font-size: 12px;
         }
         .barcode-container {
-            text-align: right;
+            text-align: end;
         }
         .barcode-container img {
-            height: 50px;
+            block-size: 50px;
             display: block;
         }
         .barcode-container div {
-            margin-top: 4px;
+            margin-block-start: 4px;
             font-size: 11px;
         }
         .statement {
             font-size: 12px;
             text-align: justify;
-            margin-top: 40px;
+            margin-block-start: 40px;
             line-height: 1.5;
         }
         .statement ul {
             list-style: none;
-            padding-left: 0;
+            padding-inline-start: 0;
             counter-reset: statement-counter;
         }
         .statement li {
             counter-increment: statement-counter;
-            margin-bottom: 10px;
-            padding-left: 25px;
+            margin-block-end: 10px;
+            padding-inline-start: 25px;
             position: relative;
         }
         .statement li::before {
             content: counter(statement-counter, lower-alpha) ".";
             font-weight: bold;
             position: absolute;
-            left: 0;
+            inset-inline-start: 0;
         }
         
         @page {
@@ -231,7 +232,7 @@
             </table>
 
             <div class="divider"></div>
-            <div class="title-section">PENDAFTARAN PASIEN RAWAT JALAN<br>INFORMASI BENEFIT</div>
+            <div class="title-section">PENDAFTARAN PASIEN RAWAT JALAN <br>INFORMASI BENEFIT</div>
             <div class="divider"></div>
 
             <div class="benefit-list">
@@ -243,13 +244,15 @@
             </div>
 
             <div class="tc">
-                <b>**Term & Condition:**</b>
+                <b>Term & Condition: </b>
                 <ul>
-                    {{#each TermsAndConditions}}
-                    <li>{{this.deskripsi_loa}}</li>
-                    {{/each}}
+                    <li>Selisih biaya (Ekses) tagih di tempat</li>
+                    <li>Pastikan pelayanan sesuai indikasi & kebutuhan medis</li>
+                    <li>Permintaan GL Akhir saat peserta pulang wajib dilakukan dengan mengisi data & biaya billing akhir, Pada aplikasi dengan melampirkan: billing akhir, resume medis dan berkas pendukung layanan/klaim secara lengkap.</li>
+                    <li>Tagihan/kuitansi harap dibuat atas nama peserta dengan disertai daftar perincian biaya perawatan dan selisih kelas (bila ada) serta ringkasan perawatan/resume yang meliputi hasil pemeriksaan yang telah dilakukan dan daftar pengobatan yang telah diberikan.</li>
+                    <li>Apabila ada kendala dapat menghubungi MICC melalui Live Chat.</li>
                 </ul>
-                <p style="margin-top: 15px;">{{FormattedLetterDate}}</p>
+                <p style="margin-block-start: 40px;">{{FormattedLetterDate}}</p>
             </div>
         </div>
         <div class="footer">
@@ -285,14 +288,16 @@
             <div class="signature-barcode-section">
                 <div class="signature">.:::::TTD Pasien/Keluarga:::::.</div>
                 <div class="barcode-container">
-                    <img src="https://barcodeapi.org/api/128/{{ReferenceNumber}}" alt="barcode">                </div>
+                    <img src="https://barcodeapi.org/api/128/{{ReferenceNumber}}" alt="barcode">
+                </div>
             </div>
 
             <div class="statement">
                 <ul>
-                  <li><b>Saya menyetujui dan memberi kuasa kepada PT Asuransi Jiwa Inhealth Indonesia (Perusahaan) dan afiliasinya untuk diberikan akses berupa segala informasi dan/atau dokumen dari dokter, fasilitas kesehatan dan/atau pihak lain sehubungan dengan layanan medis yang diberikan kepada Saya atau Tanggungan Saya berdasarkan ketentuan yang berlaku untuk keperluan administrasi, pembayaran klaim asuransi dan jaminan pembiayaan kesehatan.</b></li>
-                  <li><b>Apabila terdapat indikasi ketidakbenaran atas informasi dan/atau dokumen yang disampaikan, Saya memberikan hak sepenuhnya kepada Perusahaan untuk tidak melanjutkan proses klaim, mengembalikan biaya klaim yang telah dibayarkan Perusahaan dan/atau menghentikan pelayanan kepada Saya atau Tanggungan Saya baik secara penjaminan di provider (cashless) dan/atau reimbursement.</b></li>
-                  <li><b>LOA ini telah divalidasi melalui fitur FitAja! serta berfungsi sebagai persetujuan dari peserta dan merupakan pengganti tanda tangan basah peserta maupun provider.</b></li>
+                    <li><b>Saya menyetujui dan memberi kuasa kepada PT Asuransi Jiwa Inhealth Indonesia (Perusahaan) dan afiliasinya untuk diberikan akses berupa segala informasi dan/atau dokumen dari dokter, fasilitas kesehatan dan/atau pihak lain sehubungan dengan layanan medis yang diberikan kepada Saya atau Tanggungan Saya berdasarkan ketentuan yang berlaku untuk keperluan administrasi, pembayaran klaim asuransi dan jaminan pembiayaan kesehatan.</b></li>
+                    <li><b>Apabila terdapat indikasi ketidakbenaran atas informasi dan/atau dokumen yang disampaikan, Saya memberikan hak sepenuhnya kepada Perusahaan untuk tidak melanjutkan proses klaim, mengembalikan biaya klaim yang telah dibayarkan Perusahaan dan/atau menghentikan pelayanan kepada Saya atau Tanggungan Saya baik secara penjaminan di provider (cashless) dan/atau reimbursement.</b></li>
+                    <li><b>LOA ini telah divalidasi melalui fitur FitAja! serta berfungsi sebagai persetujuan dari peserta dan merupakan pengganti tanda tangan basah peserta maupun provider.</b></li>
+                </ul>
             </div>
         </div>
         <div class="footer2">
@@ -305,4 +310,15 @@
         </div>
     </div>
 </body>
+<script>
+    // Ganti tanda - dengan checkmark di kolom benefit
+    document.addEventListener('DOMContentLoaded', function() {
+        const limits = document.querySelectorAll('.benefit-list .limit');
+        limits.forEach(function(limit) {
+            if (limit.textContent.trim() === '-' || limit.textContent.trim() === '' || limit.innerHTML.includes('-')) {
+                limit.innerHTML = '✓';
+            }
+        });
+    });
+    </script>
 </html>
